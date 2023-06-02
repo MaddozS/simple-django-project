@@ -15,11 +15,17 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class City(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    name = models.CharField(db_column='Name', max_length=35)  # Field name made lowercase.
-    countrycode = models.ForeignKey('Country', models.DO_NOTHING, db_column='CountryCode')  # Field name made lowercase.
-    district = models.CharField(db_column='District', max_length=20)  # Field name made lowercase.
-    population = models.IntegerField(db_column='Population')  # Field name made lowercase.
+    # Field name made lowercase.
+    id = models.AutoField(db_column='ID', primary_key=True)
+    # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=35)
+    # Field name made lowercase.
+    countrycode = models.ForeignKey(
+        'Country', models.DO_NOTHING, db_column='CountryCode')
+    # Field name made lowercase.
+    district = models.CharField(db_column='District', max_length=20)
+    # Field name made lowercase.
+    population = models.IntegerField(db_column='Population')
 
     class Meta:
         managed = False
@@ -27,21 +33,40 @@ class City(models.Model):
 
 
 class Country(models.Model):
-    code = models.CharField(db_column='Code', primary_key=True, max_length=3)  # Field name made lowercase.
-    name = models.CharField(db_column='Name', max_length=52)  # Field name made lowercase.
-    continent = models.CharField(db_column='Continent', max_length=13)  # Field name made lowercase.
-    region = models.CharField(db_column='Region', max_length=26)  # Field name made lowercase.
-    surfacearea = models.FloatField(db_column='SurfaceArea')  # Field name made lowercase.
-    indepyear = models.SmallIntegerField(db_column='IndepYear', blank=True, null=True)  # Field name made lowercase.
-    population = models.IntegerField(db_column='Population')  # Field name made lowercase.
-    lifeexpectancy = models.FloatField(db_column='LifeExpectancy', blank=True, null=True)  # Field name made lowercase.
-    gnp = models.FloatField(db_column='GNP', blank=True, null=True)  # Field name made lowercase.
-    gnpold = models.FloatField(db_column='GNPOld', blank=True, null=True)  # Field name made lowercase.
-    localname = models.CharField(db_column='LocalName', max_length=45)  # Field name made lowercase.
-    governmentform = models.CharField(db_column='GovernmentForm', max_length=45)  # Field name made lowercase.
-    headofstate = models.CharField(db_column='HeadOfState', max_length=60, blank=True, null=True)  # Field name made lowercase.
-    capital = models.IntegerField(db_column='Capital', blank=True, null=True)  # Field name made lowercase.
-    code2 = models.CharField(db_column='Code2', max_length=2)  # Field name made lowercase.
+    # Field name made lowercase.
+    code = models.CharField(db_column='Code', primary_key=True, max_length=3)
+    # Field name made lowercase.
+    name = models.CharField(db_column='Name', max_length=52)
+    # Field name made lowercase.
+    continent = models.CharField(db_column='Continent', max_length=13)
+    # Field name made lowercase.
+    region = models.CharField(db_column='Region', max_length=26)
+    # Field name made lowercase.
+    surfacearea = models.FloatField(db_column='SurfaceArea')
+    # Field name made lowercase.
+    indepyear = models.SmallIntegerField(
+        db_column='IndepYear', blank=True, null=True)
+    # Field name made lowercase.
+    population = models.IntegerField(db_column='Population')
+    # Field name made lowercase.
+    lifeexpectancy = models.FloatField(
+        db_column='LifeExpectancy', blank=True, null=True)
+    # Field name made lowercase.
+    gnp = models.FloatField(db_column='GNP', blank=True, null=True)
+    # Field name made lowercase.
+    gnpold = models.FloatField(db_column='GNPOld', blank=True, null=True)
+    # Field name made lowercase.
+    localname = models.CharField(db_column='LocalName', max_length=45)
+    # Field name made lowercase.
+    governmentform = models.CharField(
+        db_column='GovernmentForm', max_length=45)
+    # Field name made lowercase.
+    headofstate = models.CharField(
+        db_column='HeadOfState', max_length=60, blank=True, null=True)
+    # Field name made lowercase.
+    capital = models.IntegerField(db_column='Capital', blank=True, null=True)
+    # Field name made lowercase.
+    code2 = models.CharField(db_column='Code2', max_length=2)
 
     class Meta:
         managed = False
@@ -49,10 +74,15 @@ class Country(models.Model):
 
 
 class Countrylanguage(models.Model):
-    countrycode = models.ForeignKey(Country, models.DO_NOTHING, db_column='CountryCode', primary_key=True)  # Field name made lowercase.
-    language = models.CharField(db_column='Language', max_length=30)  # Field name made lowercase.
-    isofficial = models.CharField(db_column='IsOfficial', max_length=1)  # Field name made lowercase.
-    percentage = models.FloatField(db_column='Percentage')  # Field name made lowercase.
+    # Field name made lowercase.
+    countrycode = models.ForeignKey(
+        Country, models.DO_NOTHING, db_column='CountryCode', primary_key=True)
+    # Field name made lowercase.
+    language = models.CharField(db_column='Language', max_length=30)
+    # Field name made lowercase.
+    isofficial = models.CharField(db_column='IsOfficial', max_length=1)
+    # Field name made lowercase.
+    percentage = models.FloatField(db_column='Percentage')
 
     class Meta:
         managed = False
@@ -60,7 +90,8 @@ class Countrylanguage(models.Model):
         unique_together = (('countrycode', 'language'),)
 
     def __unicode__(self):
-	return ("country-code: %s language: %s") %(self.countrycode.name, self.language)
+        return ("country-code: %s language: %s") % (self.countrycode.name, self.language)
+
 
 class DjangoMigrations(models.Model):
     app = models.CharField(max_length=255)
@@ -70,6 +101,7 @@ class DjangoMigrations(models.Model):
     class Meta:
         managed = False
         db_table = 'django_migrations'
+
 
 class MyCustomUserManager(BaseUserManager):
     def create_user(self, email_id, first_name, last_name, password=None):
@@ -90,11 +122,13 @@ class MyCustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, first_name, last_name=None):
-        u = self.create_user(email_id=email, password=password, first_name=first_name, last_name=last_name)
+        u = self.create_user(email_id=email, password=password,
+                             first_name=first_name, last_name=last_name)
         u.is_superuser = True
         u.is_staff = True
         u.save(using=self._db)
         return u
+
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=100)
@@ -106,7 +140,5 @@ class User(AbstractUser):
 
     objects = MyCustomUserManager()
 
-
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name"]
-
