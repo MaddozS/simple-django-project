@@ -91,6 +91,9 @@ DATABASES = {
         'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '3306',
+        'TEST': {
+            'NAME': f'test_{os.environ.get("MYSQL_DATABASE")}',
+        }
     }
 }
 
