@@ -44,20 +44,7 @@ pipeline {
             steps {
                 // run tests
                 sh 'python3 manage.py test'
-            }
-        }
-        stage('Cleanup') {
-            steps {
-                sh 'deactivate'  // Deactivate the virtual environment
-            }
-            // Close docker
-            post {
-                always {
-                    script {
-                        mysqlContainer.stop()
-                        mysqlContainer.remove()
-                    }
-                }
+                sh 'echo "Everything is OK!"'
             }
         }
         stage('Deploy') {
