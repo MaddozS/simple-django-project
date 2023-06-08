@@ -35,9 +35,9 @@ pipeline {
                 sh 'python3 manage.py makemigrations'
                 sh 'python3 manage.py migrate'
                 // sh 'python3 manage.py rebuild_index'
-                sh 'python3 manage.py runserver 0:8001'
+                // sh 'python3 manage.py runserver 0:8001'
                 // close server
-                sh 'kill $(lsof -t -i:8001)'
+                // sh 'kill $(lsof -t -i:8001)'
             }
         }
         stage('Testing') {
