@@ -19,4 +19,7 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
+    print(os.environ.get('MYSQL_USER'))
+    print(os.environ.get('MYSQL_PASSWORD'))
+
     execute_from_command_line(sys.argv)
