@@ -83,15 +83,15 @@ WSGI_APPLICATION = 'panorbit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = { 
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'world',
+        'NAME': os.environ.get('MYSQL_DATABASE'),
         'USER': os.environ.get('MYSQL_USER'),
         'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '3306',
-    }   
+    }
 }
 
 # Password validation
@@ -147,4 +147,3 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'xxxx'
 EMAIL_HOST_PASSWORD = 'xxxx'
 EMAIL_PORT = 587
-
