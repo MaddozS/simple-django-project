@@ -12,14 +12,14 @@ pipeline {
                 git credentialsId: 'github-axel-anaya-ssh', url: 'git@github.com:MaddozS/simple-django-project.git'
             }
         }
-        stage('Preparing MySQL db'){
-          steps {
-            script {
-                def mysqlImage = docker.image('mysql:8.0.15')
-                def mysqlContainer = mysqlImage.run('--name mysql -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 3306:3306 -d')
-            }
-          }
-        }
+        // stage('Preparing MySQL db'){
+        //   steps {
+        //     script {
+        //         def mysqlImage = docker.image('mysql:8.0.15')
+        //         def mysqlContainer = mysqlImage.run('--name mysql -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD -e MYSQL_DATABASE=$MYSQL_DATABASE -e MYSQL_USER=$MYSQL_USER -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 3306:3306')
+        //     }
+        //   }
+        // }
         stage('Setup Virtual Environment') {
             steps {
                 sh 'python3 -m venv venv'  // Create a virtual environment named 'venv'
