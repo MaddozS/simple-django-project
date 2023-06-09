@@ -12,27 +12,29 @@ pipeline {
                 git credentialsId: 'github-axel-anaya-ssh', url: 'git@github.com:MaddozS/simple-django-project.git'
             }
         }
-        withPythonEnv('miobra') {
-            stage('Building') {
-                steps {
-                    // install requirements
+        stage('Building') {
+            steps {
+                withPythonEnv('miobra') {
                     sh 'which python'
                     sh 'pip install -r requirements.txt'
                     sh 'python3 manage.py makemigrations'
                     sh 'python3 manage.py migrate'
                 }
+                // install requirements
             }
-            stage('Testing') {
-                steps {
-                    // run tests
+        }
+        stage('Testing') {
+            steps {
+                withPythonEnv('miobra') {
                     sh 'python3 manage.py test'
                     sh 'echo "Everything is OK!"'
                 }
+                // run tests
             }
-            stage('Deploy') {
-                steps {
-                    sh 'echo "Success!"'
-                }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo "Success!"'
             }
         }
     }
