@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Building') {
             steps {
-                withPythonEnv('miobra') {
+                withPythonEnv('/home/ubuntu/miobra/bin/python3') {
                     sh 'which python'
                     sh 'pip install -r requirements.txt'
                     sh 'python3 manage.py makemigrations'
@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Testing') {
             steps {
-                withPythonEnv('miobra') {
+                withPythonEnv('/home/ubuntu/miobra/bin/python3') {
                     sh 'python3 manage.py test'
                     sh 'echo "Everything is OK!"'
                 }
