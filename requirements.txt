@@ -22,7 +22,7 @@ protobuf==3.6.0
 pycparser==2.19
 PyJWT==1.7.1
 PyMySQL==0.9.3
-pyOpenSSL==19.0.0
+pyOpenSSL==23.2.0
 PySocks==1.6.8
 python-dateutil==2.7.5
 pytz==2018.7
