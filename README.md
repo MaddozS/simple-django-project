@@ -1,4 +1,4 @@
-# simple-django-project
+# simple-django-project test
 ## Installation
 
 ### Prerequisites
