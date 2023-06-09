@@ -14,14 +14,17 @@ pipeline {
         }
         stage('Setup Virtual Environment') {
             steps {
-                sh 'python3 -m venv venv'  // Create a virtual environment named 'venv'
+                sh 'python3 -m venv miobra'  // Create a virtual environment named 'venv'
                 sh 'chmod +x venv/bin/activate'  // Modify the permissions of the activate script
                 sh '. venv/bin/activate'  // Activate the virtual environment
+                sh 'which python'
             }
         }
         stage('Building') {
             steps {
                 // install requirements
+                sh '. miobra/bin/activate'  // Activate the virtual environment
+                sh 'which python'
                 sh 'pip install -r requirements.txt'
                 sh 'python3 manage.py makemigrations'
                 sh 'python3 manage.py migrate'
@@ -30,6 +33,7 @@ pipeline {
         stage('Testing') {
             steps {
                 // run tests
+                sh '. miobra/bin/activate'  // Activate the virtual environment
                 sh 'python3 manage.py test'
                 sh 'echo "Everything is OK!"'
             }
