@@ -22,7 +22,6 @@ pipeline {
         stage('Building') {
             steps {
                 // install requirements
-                sh '. venv/bin/activate'  // Activate the virtual environment
                 sh 'pip install -r requirements.txt'
                 sh 'python3 manage.py makemigrations'
                 sh 'python3 manage.py migrate'
@@ -31,7 +30,6 @@ pipeline {
         stage('Testing') {
             steps {
                 // run tests
-                sh '. venv/bin/activate'  // Activate the virtual environment
                 sh 'python3 manage.py test'
                 sh 'echo "Everything is OK!"'
             }
